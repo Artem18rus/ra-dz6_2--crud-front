@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Card from "./components/Card/Card";
 
-function App() {
+class App extends React.Component {
+  static async download() {
+    // const xhr = new XMLHttpRequest();
+
+    // xhr.onreadystatechange = () => {
+    //   if (xhr.readyState !== 4) return;
+    //   const data = JSON.parse(xhr.responseText);
+    //   console.log(data)
+      
+    // };
+    // xhr.open('GET', 'http://localhost:7777/notes');
+    // xhr.send();
+    let response = await fetch('http://localhost:7777/notes');
+    let responseJson = response.json();
+    return responseJson;
+  //console.log(response.json())
+// if (response.ok) { // если HTTP-статус в диапазоне 200-299
+//   // получаем тело ответа (см. про этот метод ниже)
+//   let json = await response.json();
+//   // console.log(json)
+// } else {
+//   alert("Ошибка HTTP: " + response.status);
+// }
+  }
+
+  render() {
+    // console.log(App.download())
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Card responseJson = {App.download()}/>
     </div>
   );
+  }
 }
 
 export default App;
