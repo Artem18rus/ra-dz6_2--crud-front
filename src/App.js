@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import "./App.css";
 import Card from "./components/Card/Card";
 
-class App extends Component {
-  state = {
-    data: [],
-  }
 
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    data: [],
+    }
+}
   // Code is invoked after the component is mounted/inserted into the DOM tree.
   componentDidMount() {
     const url = 'http://localhost:7777/notes';
@@ -23,14 +29,11 @@ class App extends Component {
   }
 
   render() {
-    const { data } = this.state
-    // console.log(this.state.data)
+    const { data } = this.state;
 
     return  <div className="container">
-              <p className="notesHeader">Notes</p>
               <Card data={data} />
             </div>
-            
 }
 }
 
