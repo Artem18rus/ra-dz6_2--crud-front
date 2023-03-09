@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { nanoid } from "nanoid";
 
 class AddCard extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
-  //   console.log(this.props)
-  //   // this.state = this.props.data;
-  //   // this.field = null;
-  // }
+  // state = {this.props.data}
+  constructor(props) {
+    super(props);
+    // console.log(this.props.data)
+    this.state = '';
+    this.field = null;
+  }
   
   render() {
-    console.log(this.props)
+    // setState(this.props.data)
+
     // const [fields, setFields] = useState([]);
     // console.log(this.state)
     const iconSend = require("./img/icon-send.png");
@@ -22,15 +23,18 @@ class AddCard extends React.Component {
   
     const handlerSubmit = (e) => {
       e.preventDefault();
-      //console.log(e);
-      // const newFields = {
-      //   id: nanoid(),
-      //   name: newName,
-      //   zone: newTimeZone
-      // };
-      // setFields((prevField) => {
-      //   return [...prevField, newFields];
-      // });
+      console.log()
+      fetch('http://localhost:7777/notes', {
+        method: 'POST',
+        // headers: {
+        //   'Accept': 'application/json',
+        //   'Content-Type': 'application/json',
+        // },
+        body: JSON.stringify({
+          "id": 0,
+          "content": {this.state}
+      })
+      })
     };
   
     // const changeName = (e) => {
@@ -38,7 +42,7 @@ class AddCard extends React.Component {
     // };
   
     const changeCard = (e) => {
-      //console.log(e.target.value);
+      this.setState(e.target.value);
     };
     return (
       <form onSubmit={handlerSubmit} className="addCard">
