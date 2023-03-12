@@ -41,15 +41,11 @@ componentDidUpdate(oldProps, oldState) {
 }
 
 removeCard(e) {
-  console.log(e.target.parentElement);
-  fetch(`http://localhost:7777/notes/id`, {
+  const targetIdx = Number(e.target.parentElement.getAttribute('index'));
+  let val = this.state.data.find((item, idx) => item.id === targetIdx)
+  fetch(`http://localhost:7777/notes/${val.id}`, {
     method: 'DELETE',
-    // body: JSON.stringify({
-    //   "id": 0,
-    //   "content": this.state.value,
-    // })
   })
-  // .then(response => console.log(response));
 }
 
   render() {
@@ -65,7 +61,7 @@ removeCard(e) {
         </p>
         <ul className="card">
           {data.map((oneCard) => (
-            <li className="item-card" name={this.state.data.id} key={nanoid()}>{oneCard.content}
+            <li className="item-card" index={oneCard.id} key={nanoid()}>{oneCard.content}
               <img className="icon-cancel" src={iconClose} alt="icon-close" onClick={this.removeCard}/>
             </li>
             
