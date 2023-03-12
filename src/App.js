@@ -14,6 +14,7 @@ class App extends Component {
     }
 }
   // Code is invoked after the component is mounted/inserted into the DOM tree.
+  //componentDidMount
   componentDidMount() {
     const url = 'http://localhost:7777/notes';
 
@@ -27,10 +28,11 @@ class App extends Component {
       })
 
   }
+  
 
-  render() {
+render() {
     const { data } = this.state;
-
+    console.log(data)
     return  <div className="container">
               <Card data={data} />
             </div>

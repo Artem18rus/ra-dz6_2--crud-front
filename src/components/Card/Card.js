@@ -29,6 +29,7 @@ class Card extends React.Component {
         </ul>
         {/* {console.log(data)} */}
         <AddCard data={data}/>
+
         </div>
     );
   }

@@ -23,18 +23,29 @@ class AddCard extends React.Component {
   
     const handlerSubmit = (e) => {
       e.preventDefault();
-      console.log()
+      // console.log(this.state.value)
       fetch('http://localhost:7777/notes', {
         method: 'POST',
-        // headers: {
-        //   'Accept': 'application/json',
-        //   'Content-Type': 'application/json',
-        // },
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
           "id": 0,
-          "content": {this.state}
+          "content": this.state.value,
+        })
       })
-      })
+
+      // .then(res => res.json())
+      // .then(res => console.log(res))
+
+      // fetch('http://localhost:7777/notes')
+      // .then((result) => result.json())
+      // .then((result) => {
+      //     console.log(result)
+
+      //   })
+      console.log(this.props.data)
     };
   
     // const changeName = (e) => {
@@ -42,7 +53,8 @@ class AddCard extends React.Component {
     // };
   
     const changeCard = (e) => {
-      this.setState(e.target.value);
+      this.setState({value: e.target.value});
+      // console.log(this.state)
     };
     return (
       <form onSubmit={handlerSubmit} className="addCard">
