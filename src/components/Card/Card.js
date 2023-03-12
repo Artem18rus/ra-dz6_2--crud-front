@@ -1,7 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
 import AddCard from "../AddCard/AddCard"
-import RemoveCard from "../RemoveCard/RemoveCard"
 
 
 
@@ -16,22 +15,19 @@ class Card extends React.Component {
       data: [],
     }
     this.removeCard = this.removeCard.bind(this)
+    this.updateCard = this.updateCard.bind(this)
 }
 
 loadData() {
-  // setTimeout(() => {
     this.fetchApi().then((result) => result.json()).then((result) => {
       this.setState({
         data: result,
       })
     })
-  // }, 100)
-
 }
 
 componentDidMount() {
   this.loadData()
-
 }
 
 componentDidUpdate(oldProps, oldState) {
@@ -45,19 +41,24 @@ removeCard(e) {
   let val = this.state.data.find((item, idx) => item.id === targetIdx)
   fetch(`http://localhost:7777/notes/${val.id}`, {
     method: 'DELETE',
+  }).then(() => {
+    this.loadData()
   })
+}
+
+updateCard(e) {
+  this.loadData()
 }
 
   render() {
     const { data } = this.state;
-    // console.log(data)
     const iconClose = require("./img/icon-cancel.png");
     const iconUpdate = require("./img/icon-update.png");
 
     return (
       <div className="sectionCard">
         <p className="notesHeader">Notes
-          <img className="icon-update" src={iconUpdate} alt="icon-update" />
+          <img className="icon-update" src={iconUpdate} alt="icon-update" onClick={this.updateCard}/>
         </p>
         <ul className="card">
           {data.map((oneCard) => (

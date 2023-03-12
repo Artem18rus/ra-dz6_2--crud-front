@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { nanoid } from "nanoid";
-
+import React from "react";
 class AddCard extends React.Component {
   constructor(props) {
     super(props);

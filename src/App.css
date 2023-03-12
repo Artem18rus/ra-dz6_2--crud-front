@@ -55,6 +55,7 @@
   background: white;
   left: 80px;
   top: 0px;
+  cursor: pointer;
 }
 
 textarea {
